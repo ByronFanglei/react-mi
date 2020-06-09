@@ -1,0 +1,1 @@
+export const INIT_SWIPER = 'home/init_swiper';

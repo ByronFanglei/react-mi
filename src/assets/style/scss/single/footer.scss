@@ -1,0 +1,78 @@
+.conternt{
+  width: 1226px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.topbar{
+  .server{
+    overflow: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 27px 0;
+    border-bottom: 1px solid #e0e0e0;
+    .iconfont{
+      display: inline-block;
+      font-size: 24px;
+      margin-right: 5px;
+    }
+  }
+  .tel{
+    font-size: 22px;
+    line-height: 1;
+    color: #ff6700;
+    margin: 0 0 5px 0;
+  }
+  .time{
+    margin: 0 0 5px 0;
+  }
+  .btn{
+    margin: 0 auto;
+    width: 118px;
+    height: 28px;
+    font-size: 12px;
+    line-height: 28px;
+    color: #ff6700;
+    border: 1px solid #ff6700;
+    transition: all .5s;
+    cursor: pointer;
+    &:hover{
+      color: #fff;
+      background: #ff6700;
+    }
+  }
+  .follow{
+    margin-top: 10px;
+    .iconfont{
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 20px;
+      transition: all .5s;
+      cursor: pointer;
+      &:hover{
+        color: #ff6700;
+      }
+    }
+  }
+}
+.sites{
+  margin: 14px 0;
+}
+.botinfo{
+  font-size: 14px;
+  margin: 14px 0;
+  p{
+    line-height: 20px;
+  }
+}
+dl{
+  flex: 1;
+  color: #424242;
+  dt{
+    margin: -1px 0 26px;
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  dd{
+    margin-top: 10px;
+  }
+}
