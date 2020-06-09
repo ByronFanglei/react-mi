@@ -17,7 +17,7 @@ const Login = memo(() => {
     if(/^1[3456789]\d{9}$/.test(rtel.current.value)){
       dispatch(actionCreators.SendCode(rtel.current.value))
       dispatch(actionCreators.changeIscode(!Data.isCode))
-      var time = 5
+      var time = 60
       var timer = setInterval(() => {
         time--
         rsend.current.innerHTML = `请稍等${time}`
@@ -29,6 +29,14 @@ const Login = memo(() => {
       }, 1000)
     }else{
       message.warning('手机号输入有误！！！')
+    }
+  }, [])
+  // 注册
+  const sendregister = useCallback(() => {
+    if(rcode.current.value){
+      dispatch(actionCreators.register(ruser.current.value, rpass.current.value, rtel.current.value, rcode.current.value))
+    }else{
+      message.warning('请输入验证码！！！')
     }
   }, [])
   const Data = useSelector((state) => {
@@ -56,7 +64,7 @@ const Login = memo(() => {
           <input type="text" placeholder='请输入验证码' ref={rcode} />
           <div onClick={sendCode}  ref={rsend} className={Data.isCode ? 'noclick' : ''}>获取验证码</div>
         </div>
-        <div className='btn'>立即注册</div>
+        <div className='btn' onClick={sendregister}>立即注册</div>
       </LoginFrom>
       <LoginFooter>
         永远相信美好的事情即将发生

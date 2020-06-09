@@ -16,6 +16,9 @@ axios.interceptors.response.use(function(response){
     setTimeout(() => {
       hideLoading ()
     },1000)
+  }else{
+    hideLoading ()
+    message.warning('服务器忙，请稍后再试！')
   }
   return res.data
 }, error => {

@@ -8,19 +8,14 @@ import { Link } from 'react-router-dom';
 const Title = memo(() => {
   const Data = useSelector((state) => {
     return{
-      data: state.getIn(['title', 'data']).toJS(),
+      // 获取种类名称
+      data: state.getIn(['title', 'data']).toJS()
     }
   })
-  const xiaomi = Data.data.filter(item => {
-    return item.categoryId === 6
-  })
-  const redmi = Data.data.filter(item => {
-    return item.categoryId === 7
-  })
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actionCreators.product()) 
-    dispatch(actionCreators.productname())
   }, [dispatch])
   return (
     <Sotr>
@@ -31,45 +26,32 @@ const Title = memo(() => {
           </Link>
         </Logo>
         <ul className='allspecie'>
-          <Species>
-            <span>小米手机</span>
-            <div className='item-product'>
-              <ul className='conternt allitem'>
-                {
-                  xiaomi.map((item) => (
-                    <li key={item.id}>
-                      <div className='itemimg'>
-                        <img src={item.mainImage} alt=""/>
-                      </div>
-                      <div className='itenname'>{item.name}</div>
-                      <div className='itemprice'>{item.price}元起</div>
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-          </Species>
-          <Species>
-          <span>Redmi手机</span>
-            <div className='item-product'>
-              <ul className='conternt allitem'>
-              {
-                redmi.map((item) => (
-                  <li key={item.id}>
-                    <div className='itemimg'>
-                      <img src={item.mainImage} alt=""/>
-                    </div>
-                    <div className='itenname'>{item.name}</div>
-                    <div className='itemprice'>{item.price}元起</div>
-                  </li>
-                ))
-              }
-              </ul>
-            </div>
-          </Species>
-          <Species>电视</Species>
-          <Species>笔记本</Species>
-          <Species>家电</Species>
+          {
+            Data.data.map(item => {
+              return(
+                <Species key={item.id}>
+                  <span>{item.name}</span>
+                  <div className='item-product'>
+                    <ul className='conternt allitem'>
+                      {
+                        item.productList.map(data  => {
+                          return(
+                            <li key={data.id}>
+                              <div className='itemimg'>
+                                <img src={data.mainImage} alt=""/>
+                              </div>
+                              <div className='itenname'>{data.name}</div>
+                              <div className='itemprice'>{data.price}元</div>
+                            </li>
+                          )
+                        })
+                      }
+                    </ul>
+                  </div>
+                </Species>
+              )
+            })
+          }
           <Species>路由器</Species>
           <Species>智能硬件</Species>
           <Species>服务</Species>

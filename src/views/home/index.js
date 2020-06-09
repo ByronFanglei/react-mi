@@ -7,6 +7,7 @@ import Sidebar from './components/sidebar';
 import BannerBar from './components/bannerbar';
 import Goods from './components/typegoods';
 import { HomeContent } from './style';
+
 const Home = memo(() => {
   return (
     <Fragment>

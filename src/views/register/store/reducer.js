@@ -2,7 +2,8 @@
 import { fromJS } from 'immutable';
 import { actionType } from '.';
 const defaultState = fromJS({
-  isCode: false
+  isCode: false // 是否禁用获取验证码
+
 })
 
 export default(state=defaultState, action) => {
