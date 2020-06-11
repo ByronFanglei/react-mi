@@ -23,7 +23,7 @@ export const ContentLeft = style.div`
 export const ContentRight = style.div`
   backgropund: skyblue;
 `;
-export const NavA = style.a`
+export const NavA = style.span`
   display: inline-block;
   color: #b0b0b0;
   font-size: 12px;

@@ -1,12 +1,13 @@
 import * as actionType from './actionType';
 import axios from '../../../tool/axios';
 import { message} from 'antd';
+import { fromJS } from 'immutable';
 
 // import { fromJS } from 'immutable';
 // 获取手机号code
 export const SendCode = (rtel) => {
   return(dispatch) => {
-    axios.post(`/user/user/sendsms/${rtel}`,).then(value => {
+    axios.post(`/user/sendsms/${rtel}`,).then(value => {
       message.success('发送成功！请查收！')
     }).catch(reason => {
       console.log(reason)
@@ -19,16 +20,35 @@ export const changeIscode = (data) => ({
   data
 })
 // 注册
+const updatalogin = (data) => ({
+  type: actionType.UPDATA_LOGIN,
+  data: fromJS(data)
+})
 export const register = (username, password, phone, phonecode) => {
   return(dispatch) => {
-    axios.post(`/user/user/register/${phonecode}`, {
+    axios.post(`/user/register/${phonecode}`, {
       username,
       password,
       phone
     }).then(value => {
-      console.log(value)
+      if(!value){
+        message.success('注册失败！')
+        return
+      }else{
+        message.success('注册成功!')
+        dispatch(updatalogin(true))
+      }
     }).catch(reason => {
       console.log(reason)
+    })
+  }
+}
+// 注册变为false
+export const registerout = () => {
+  return(dispatch) => {
+    dispatch({
+      type: actionType.OUTREGISTER_LOGIN,
+      data: false
     })
   }
 }

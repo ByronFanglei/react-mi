@@ -130,7 +130,7 @@ export const GoodShow = Style.div`
     li{
       float: left;
       width: 234px;
-      height: 270px;
+      height: 310px;
       padding: 20px 0;
       margin-left: 14px;
       margin-bottom: 14px;

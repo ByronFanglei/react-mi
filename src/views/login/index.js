@@ -1,15 +1,27 @@
-import React,{ memo, useCallback } from 'react';
+import React,{ memo, useCallback, useRef } from 'react';
 import { LoginAll, LoginFrom, LoginFooter } from './style';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from './store';
 
-const Login = memo(() => {
-  let username, password;
+const Login = memo((props) => {
+  const username = useRef(null)
+  const password = useRef(null)
   const dispatch = useDispatch()
+  const Data = useSelector((state) => {
+    return {
+      token: state.getIn(['login', 'token'])
+    }
+  })
+  if(Data.token){
+    sessionStorage.setItem('token', Data.token)
+  }
+  if(sessionStorage.getItem('token')){
+    props.history.push('/')
+  }
   // 登录
   const handLogin = useCallback(() => {
-    dispatch(actionCreators.Login(username.value, password.value))
+    dispatch(actionCreators.Login(username.current.value, password.current.value))
   }, [])
   return(
     <LoginAll>
@@ -25,8 +37,8 @@ const Login = memo(() => {
           <div>扫码登录</div>
         </div>
         <div className='userinp'>
-          <input type="text" placeholder='请输入用户名' ref={input => username = input}/>
-          <input type="password" ref={input => password = input} />
+          <input type="text" placeholder='请输入用户名' ref={username}/>
+          <input type="password" ref={password} />
         </div>
         <div className='btn' onClick={handLogin}>登录</div>
         <div className='loginInfo'>
@@ -43,4 +55,4 @@ const Login = memo(() => {
 });
 
 
-export default Login;
+export default withRouter(Login);

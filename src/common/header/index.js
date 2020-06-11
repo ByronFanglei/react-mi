@@ -1,8 +1,8 @@
-import React,{ memo, Fragment } from 'react';
+import React,{ memo, Fragment, useCallback } from 'react';
 import { TopBanner, Nav, NavContent, ContentLeft, ContentRight, NavA, NavSpan } from './style';
 import '../../assets/style/scss/single/header.scss';
 import { Link } from 'react-router-dom';
-const Header = memo((props) => {
+const Header = memo(() => {
   return(
     <Fragment>
       <TopBanner />
@@ -34,22 +34,44 @@ const Header = memo((props) => {
             <NavA>Select Location</NavA>
           </ContentLeft>
           <ContentRight>
-            <Link to='/login'>
-              <NavA>登录</NavA>
-            </Link>
-            <NavSpan>|</NavSpan>
-            <NavA>注册</NavA>
+            <User></User>
             <NavSpan>|</NavSpan>
             <NavA>通知消息</NavA>
-            <NavA className='cart'>
-              <span className='iconfont'>&#xe63f;</span>
-              购物车（0）
-            </NavA>
+            <Link to='/cart'>
+              <NavA className='cart'>
+                <span className='iconfont'>&#xe63f;</span>
+                购物车（0）
+              </NavA>
+            </Link>
           </ContentRight>
         </NavContent>
       </Nav>
     </Fragment>
   )
+})
+
+const User = memo(() => {
+  const outLogin = useCallback(() => {
+    sessionStorage.setItem('token', '')
+    window.location.reload()
+  }, [])
+  if(sessionStorage.getItem('token')){
+    return(
+      <NavA onClick={outLogin}>退出</NavA>
+    )
+  }else{
+    return(
+      <Fragment>
+        <Link to='/login'>
+          <NavA>登录</NavA>
+        </Link>
+        <NavSpan>|</NavSpan>
+        <Link to='/register'>
+          <NavA>注册</NavA>
+        </Link>
+      </Fragment>
+    )
+  }
 })
 
 export default Header;

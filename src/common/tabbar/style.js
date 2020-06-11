@@ -2,14 +2,22 @@ import Style from 'styled-components';
 import logo from '../../assets/static/images/mi-logo.png';
 import home from '../../assets/static/images/mi-home.png';
 
-export const Sotr = Style.div`
-  width: 1226px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  display: flex;
-  border-top: 1px solid #e0e0e0;
+
+export const BarConent = Style.div`
+  width: 100%;
+  height: 100px;
+  font-size: 12px;
+  border-bottom: 2px solid #ff6700;
   background: #fff;
+  color: #b0b0b0;
+`;
+export const BarInner = Style.div`
+  width: 1226px;
+  margin: 0 auto;
+  display: flex;
+  .logo{
+    background: 
+  }
 `;
 export const Logo = Style.div`
   width: 55px;
@@ -17,6 +25,7 @@ export const Logo = Style.div`
   background-color: #ff6700;
   margin: 0 22px 0 0;
   overflow: hidden;
+  margin-top: 26px;
 `;
 export const LogoA = Style.span`
   display: inline-block;
@@ -45,16 +54,39 @@ export const LogoA = Style.span`
     transition: margin .2s;
   }
 `;
-export const Species = Style.li`
-  float: left;
-  padding: 26px 10px 38px;
-  cursor: pointer;
-  transition: height .5s;
-  &:hover{
-    .item-product{
-      display: block;
+export const BarInfo = Style.div`
+  flex: 8;
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  .title{
+    font-size: 28px;
+    font-weight: normal;
+    color: #424242;
+  }
+  .info{
+    height: 20px;
+    line-height: 20px;
+    margin-left: 15px;
+    font-size: 12px;
+  }
+`;
+export const BarUser = Style.div`
+  flex: 2;
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .line{
+    border-left: 1px solid #ccc;
+    height: 10px;
+    display: inline-block;
+    margin: 0 10px;
+  }
+  .listcart{
+    cursor: pointer;
+    &:hover{
+      color: #ff6700;
     }
   }
 `;
-
-

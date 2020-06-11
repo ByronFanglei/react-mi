@@ -1,23 +1,29 @@
 import React,{ memo, useCallback, useRef } from 'react';
 import { LoginAll, LoginFrom, LoginFooter } from '../login/style';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from './store';
 import { message } from 'antd';
 
-const Login = memo(() => {
+const Login = memo((props) => {
   const ruser = useRef(null)
   const rpass = useRef(null)
   const rtel = useRef(null)
   const rcode = useRef(null)
   const rsend = useRef(null)
   const dispatch = useDispatch()
+  var time = 60
+  const Data = useSelector((state) => {
+    return{
+      isCode: state.getIn(['register', 'isCode']),
+      isRegister: state.getIn(['register', 'isRegister'])
+    }
+  })
   // 手机号验证
   const sendCode = useCallback(() => {
     if(/^1[3456789]\d{9}$/.test(rtel.current.value)){
       dispatch(actionCreators.SendCode(rtel.current.value))
       dispatch(actionCreators.changeIscode(!Data.isCode))
-      var time = 60
       var timer = setInterval(() => {
         time--
         rsend.current.innerHTML = `请稍等${time}`
@@ -35,15 +41,18 @@ const Login = memo(() => {
   const sendregister = useCallback(() => {
     if(rcode.current.value){
       dispatch(actionCreators.register(ruser.current.value, rpass.current.value, rtel.current.value, rcode.current.value))
+      time = 1
+      // 是否注册设置false
+      setTimeout(() => {
+        dispatch(actionCreators.registerout())
+      }, 2000)
+      setTimeout(() => {
+        props.history.push('/login')
+      }, 3000)
     }else{
       message.warning('请输入验证码！！！')
     }
   }, [])
-  const Data = useSelector((state) => {
-    return{
-      isCode: state.getIn(['register', 'isCode'])
-    }
-  })
   return(
     <LoginAll>
       <div>
@@ -74,4 +83,4 @@ const Login = memo(() => {
 });
 
 
-export default Login;
+export default withRouter(Login);
