@@ -8,8 +8,16 @@ import 'antd/dist/antd.css';
 axios.defaults.baseURL = '/byron';
 // 设置请求时间
 axios.defaults.timeout = 8000;
+// 请求前拦截
+axios.interceptors.request.use(request => {
+  let token = sessionStorage.getItem('token')
+  request.headers.Authorization = `Bearer ${token}`
+  return request
+}, error => {
+  return Promise.reject(error)
+})
 // 请求后拦截
-axios.interceptors.response.use(function(response){
+axios.interceptors.response.use(response => {
   let res = response.data
   showLoading ()
   if(res.flag){

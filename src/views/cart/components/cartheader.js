@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
 import { CarBarInner, CartHeader } from '../style';
 
-const CartHead = memo(() => {
+const CartHead = memo((props) => {
   return(
     <CarBarInner>
       <CartHeader>
         <div className='alllist'>
-          <span className='iconfont'>&#xe77b;</span>
+        <Select
+          isAllSelect={props.isAllSelect}
+        ></Select>
           全选
         </div>
         <div className='img'></div>
@@ -19,5 +21,16 @@ const CartHead = memo(() => {
     </CarBarInner>
   )
 });
+const Select = memo((props) => {
+  if(props.isAllSelect){
+    return(
+      <span className='iconfont'>&#xe793;</span>
+    )
+  }else{
+    return(
+      <span className='iconfont'>&#xe77b;</span>
+    )
+  }
+})
 
 export default CartHead;

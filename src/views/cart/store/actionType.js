@@ -1,0 +1,1 @@
+export const INIT_CART_LIST = 'cart/INIT_CART_LIST';

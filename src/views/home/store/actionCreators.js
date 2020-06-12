@@ -9,7 +9,7 @@ const initSwiper = (data) => ({
 })
 export const swiperdata = () => {
   return(dispatch) => {
-    axios.get('/ad/ad/swipe').then(value => {
+    axios.get('/ad/swipe').then(value => {
       dispatch(initSwiper(value))
     }).catch(reason => {
       console.log(reason)

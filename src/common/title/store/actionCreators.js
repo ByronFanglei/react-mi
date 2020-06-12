@@ -11,7 +11,7 @@ const initData = (data) => ({
 export const product = () => {
   return (dispatch) => {
     axios.get('/goods/category/findCP').then(value => {
-      dispatch(initData(value))
+      dispatch(initData(value || []))
     }).catch(reason => {
       console.log(reason)
     })
